@@ -88,15 +88,28 @@ System messages:
 
 ```
 net-cat/
-├── main.go              # Entry point
-├── LICENSE              # MIT License
-├── README.md            # Project documentation
-└── server/
-    ├── server.go        # Server setup and lifecycle
-    ├── client.go        # Client connection and I/O handling
-    ├── broadcaster.go   # Message distribution to clients
-    ├── logger.go        # Chat and event logging
-    ├── utils.go         # Helper utilities
+├── broadcast
+│   └── broadcast.go
+├── client
+│   └── client.go
+├── go.mod
+├── LICENSE
+├── logo.txt
+├── logs
+│   └── chat_log_8989.log
+├── main.go
+├── models
+│   └── models.go
+├── projectplan.md
+├── README.md
+├── server
+│   └── server.go
+├── tests
+│   ├── client_test.go
+│   └── server_test.go
+└── utils
+    └── utils.go
+
 ```
 
 ---
