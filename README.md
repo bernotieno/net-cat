@@ -38,9 +38,11 @@ go build -o TCPChat
 ### Start the Server
 
 ```bash
-# On default port 8989
+# On default port 9060
 ./TCPChat
+```
 
+```bash
 # Or specify a different port
 ./TCPChat 2525
 ```
@@ -49,7 +51,7 @@ go build -o TCPChat
 
 ```bash
 # Connect via netcat
-nc localhost 8989
+nc localhost 9060
 ```
 ```bash
 # Or connect on a custom port
@@ -96,7 +98,7 @@ net-cat/
 ├── LICENSE
 ├── logo.txt
 ├── logs
-│   └── chat_log_8989.log
+│   └── chat_log_9060.log
 ├── main.go
 ├── models
 │   └── models.go
