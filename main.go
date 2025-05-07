@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	port := ":8989"
+	port := ":9060"
 
 	// Get port from command line argument
 	if len(os.Args) == 2 {
