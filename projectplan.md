@@ -46,7 +46,7 @@ tcpchat/
 ## 🚀 Features
 
 ### ✅ Core Server Features
-- Start on port `8989` by default or custom port
+- Start on port 9060`` by default or custom port
 - Accept up to **10 clients**
 - Welcome message with Linux ASCII art
 - Ask for and validate client name (non-empty)
@@ -84,7 +84,7 @@ tcpchat/
   ```
   [USAGE]: ./TCPChat $port
   ```
-- No port → default to `8989`
+- No port → default to `9060`
 - Max clients → reject new connections
 - Empty name → request again
 - Empty messages → ignore
@@ -99,7 +99,7 @@ tcpchat/
   - Message formatting
   - Name validation
   - Broadcasting logic
-- **Manual testing** using multiple terminal clients (`nc localhost 8989`)
+- **Manual testing** using multiple terminal clients (`nc localhost 9060`)
 
 ---
 
@@ -110,9 +110,9 @@ Include:
 - Setup & Installation
 - Usage examples:
   ```bash
-  $ go run .            # uses default port 8989
+  $ go run .            # uses default port 9060
   $ go run . 2525       # custom port
-  $ nc localhost 8989   # connect client
+  $ nc localhost 9060   # connect client
   ```
 - Contribution guidelines
 - Bonus commands (if implemented)
