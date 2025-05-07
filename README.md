@@ -66,8 +66,8 @@ Once connected, users are prompted to input a username. Chat begins right after 
 
 ### Available Commands
 
-- `/exit` — Disconnect from the server  
-- `/change <new_username>` — Update your current username  
+- `/quit` — Disconnect from the server  
+- `/rename <new_name>` — Update your current username  
 
 ---
 
