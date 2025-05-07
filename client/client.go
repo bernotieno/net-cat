@@ -51,13 +51,13 @@ func HandleClient(conn net.Conn, fileName string) {
 			continue
 		}
 
-		if msg == "/exit" {
+		if msg == "/quit" {
 			break
-		} else if strings.HasPrefix(msg, "/change ") {
-			newName := strings.TrimPrefix(msg, "/change ")
+		} else if strings.HasPrefix(msg, "/rename ") {
+			newName := strings.TrimPrefix(msg, "/rename ")
 
 			if newName == "" {
-				conn.Write([]byte("Invalid name. Usage: /change <new_name>\n"))
+				conn.Write([]byte("Invalid name. Usage: /rename <new_name>\n"))
 				continue
 			}
 
