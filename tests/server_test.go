@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -56,13 +57,20 @@ func TestInitServer(t *testing.T) {
 				if err := os.MkdirAll(testLogsPath, os.ModePerm); err != nil {
 					t.Fatalf(" Setup: Failed to create test logs directory: %v", err)
 				}
+
+				// Create logo file for test
+				err := os.WriteFile("logo.txt", []byte("Welcome to TCP Chat!\n"), 0644)
+				if err != nil {
+					t.Fatalf("Failed to create logo file: %v", err)
+				}
+
 				return func(t *testing.T) {
 					if models.LogFile != nil {
 						models.LogFile.Close()
 						models.LogFile = nil
 					}
+					os.Remove("logo.txt")
 				}
-
 			},
 			expectErr: false,
 			validateFunc: func(t *testing.T, port string, logDir string) {
@@ -81,15 +89,26 @@ func TestInitServer(t *testing.T) {
 				}
 				defer conn.Close()
 
-				buffer := make([]byte, 1024)
+				// Create a buffered reader to read line by line
+				reader := bufio.NewReader(conn)
 				conn.SetReadDeadline(time.Now().Add(2 * time.Second))
-				n, err := conn.Read(buffer)
+
+				// Read and verify logo
+				logo, err := reader.ReadString('\n')
 				if err != nil {
-					t.Errorf("Error reading from server: %v", err)
-				} else if n == 0 {
-					t.Errorf("No data received from server after connection")
-				} else if !strings.Contains(string(buffer[:n]), "[ENTER YOUR NAME]:") {
-					t.Errorf("Expected name prompt, got: %s", string(buffer[:n]))
+					t.Fatalf("Error reading logo: %v", err)
+				}
+				if len(logo) == 0 {
+					t.Error("Expected logo, but got empty response")
+				}
+
+				// Read and verify name prompt
+				namePrompt, err := reader.ReadString(':')
+				if err != nil {
+					t.Fatalf("Error reading name prompt: %v", err)
+				}
+				if !strings.Contains(namePrompt, "[ENTER YOUR NAME]:") {
+					t.Errorf("Expected name prompt, got: %q", namePrompt)
 				}
 			},
 		},
@@ -160,5 +179,4 @@ func TestInitServer(t *testing.T) {
 			}
 		})
 	}
-
 }
